@@ -7,9 +7,8 @@
 <meta name="description" content="Call it right. Climb the board. Nigerian prediction markets on NGX, FX, football, politics and entertainment." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
 <style>
   html, body { margin: 0; padding: 0; background: #0F1B14; }
   * { box-sizing: border-box; }
@@ -19,279 +18,21 @@
   ::-webkit-scrollbar { display: none; }
   input:focus { outline: 1px solid #1FA35B; }
   a { color: inherit; }
+  #root:empty::before {
+    content: "Loading Naija Predicts\2026";
+    display: block;
+    text-align: center;
+    padding-top: 40vh;
+    color: #93A599;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
 </style>
 </head>
 <body>
 <div id="root"></div>
+<script>
+(()=>{var{useState:n,useEffect:j}=React,O=["All","NGX","FX","Football","Politics","Naija Ent"],g=100,q=[{id:3,category:"Football",question:"Super Eagles to win their next AFCON qualifier?",yes:71,no:29,closes:"Sat, kickoff",hot:!0},{id:4,category:"Politics",question:"Fuel subsidy debate resolved before month end?",yes:27,no:73,closes:"Sep 30",hot:!1},{id:5,category:"Naija Ent",question:"Will this week's BBN eviction be a top-3 favorite?",yes:33,no:67,closes:"Sun, 10pm",hot:!0}],U=[{rank:1,name:"Chiamaka_V",points:14250},{rank:2,name:"OluOfLagos",points:12980},{rank:3,name:"Emeka_Predicts",points:11430},{rank:4,name:"You",points:8600,isUser:!0},{rank:5,name:"TundeTrades",points:7920}],_=[{symbol:"DANGCEM",name:"Dangote Cement"},{symbol:"GTCO",name:"GTCO"},{symbol:"MTNN",name:"MTN Nigeria"}],l={flame:o=>React.createElement("svg",{width:o.size||14,height:o.size||14,viewBox:"0 0 24 24",fill:"none",stroke:o.color||"currentColor",strokeWidth:"2"},React.createElement("path",{d:"M12 2c1 4-3 5-3 9a3 3 0 006 0c0-1.5-.5-2-1-3 2 1 3 3 3 5a5 5 0 01-10 0c0-4 3-6 5-11z"})),trophy:o=>React.createElement("svg",{width:o.size||18,height:o.size||18,viewBox:"0 0 24 24",fill:"none",stroke:o.color||"currentColor",strokeWidth:"2"},React.createElement("path",{d:"M8 21h8M12 17v4M7 4h10v4a5 5 0 01-10 0V4zM7 5H4a3 3 0 003 3M17 5h3a3 3 0 01-3 3"})),wallet:o=>React.createElement("svg",{width:o.size||14,height:o.size||14,viewBox:"0 0 24 24",fill:"none",stroke:o.color||"currentColor",strokeWidth:"2"},React.createElement("rect",{x:"2",y:"6",width:"20",height:"14",rx:"2"}),React.createElement("path",{d:"M2 10h20M17 15h.01"})),check:o=>React.createElement("svg",{width:o.size||12,height:o.size||12,viewBox:"0 0 24 24",fill:"none",stroke:o.color||"currentColor",strokeWidth:"3"},React.createElement("path",{d:"M20 6L9 17l-5-5"})),settings:o=>React.createElement("svg",{width:o.size||15,height:o.size||15,viewBox:"0 0 24 24",fill:"none",stroke:o.color||"currentColor",strokeWidth:"2"},React.createElement("circle",{cx:"12",cy:"12",r:"3"}),React.createElement("path",{d:"M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1-1.6 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.9.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.9V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"})),refresh:o=>React.createElement("svg",{width:o.size||13,height:o.size||13,viewBox:"0 0 24 24",fill:"none",stroke:o.color||"currentColor",strokeWidth:"2"},React.createElement("path",{d:"M21 12a9 9 0 11-3-6.7M21 3v6h-6"})),alert:o=>React.createElement("svg",{width:o.size||13,height:o.size||13,viewBox:"0 0 24 24",fill:"none",stroke:o.color||"currentColor",strokeWidth:"2"},React.createElement("path",{d:"M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"}))};function V(){let[o,M]=n("feed"),[p,B]=n("All"),[b,T]=n(8600),[k,A]=n({}),[S,f]=n(null),[R,m]=n(!1),[u,E]=n(null),[d,y]=n("loading"),[z,$]=n(""),[I,G]=n({}),[c,v]=n("idle"),[h,w]=n({fx:{yes:62,no:38},dangcem:{yes:44,no:56}});j(()=>{C()},[]);async function C(){y("loading");try{let i=await(await fetch("https://open.er-api.com/v6/latest/USD")).json();i.result==="success"&&i.rates&&i.rates.NGN?(E(i.rates.NGN),y("live")):y("error")}catch{y("error")}}async function D(t){if(t){v("loading");try{let i={};for(let s of _){let a=await fetch(`https://mansaapi.com/api/v1/markets/exchanges/NGX/stocks/${s.symbol}`,{headers:{Authorization:`Bearer ${t}`}});if(!a.ok)throw new Error("request failed");let r=await a.json();i[s.symbol]=r.data||r}G(i),v("live")}catch{v("error")}}}let L=u?Math.ceil(u/25)*25:1650,x=I.DANGCEM,N=[...[{id:1,category:"FX",question:`Will USD/NGN close above \u20A6${L.toLocaleString()} this Friday?`,context:d==="live"?`Live rate: \u20A6${u.toFixed(2)}`:d==="loading"?"Fetching live rate\u2026":"Live rate unavailable \u2014 showing last known odds",yes:h.fx.yes,no:h.fx.no,closes:"Fri, 5pm WAT",hot:!0,live:d==="live"},{id:2,category:"NGX",question:"Will Dangote Cement gain 3%+ this week?",context:c==="live"&&x?`Live: \u20A6${x.price??"\u2014"} (${x.change_percent??x.changePercent??"\u2014"}% today)`:c==="loading"?"Fetching live price\u2026":"Add a free Mansa API key in Settings for live NGX prices",yes:h.dangcem.yes,no:h.dangcem.no,closes:"Fri, close",hot:!1,live:c==="live"}],...q],X=p==="All"?N:N.filter(t=>t.category===p);function W(t,i){if(!k[t]){if(b<g){f("Not enough points to predict."),setTimeout(()=>f(null),1800);return}T(s=>s-g),A(s=>({...s,[t]:i})),t===1?w(s=>F(s,"fx",i)):t===2&&w(s=>F(s,"dangcem",i)),f(`Staked ${g} pts on ${i.toUpperCase()}`),setTimeout(()=>f(null),1800)}}function F(t,i,s){let a=t[i],r=2,P=s==="yes"?{yes:Math.min(96,a.yes+r),no:Math.max(4,a.no-r)}:{no:Math.min(96,a.no+r),yes:Math.max(4,a.yes-r)};return{...t,[i]:P}}let e={bg:"#0F1B14",surface:"#16241C",surface2:"#1D2E23",green:"#1FA35B",gold:"#F2B705",text:"#F5F2EA",muted:"#93A599",red:"#E4572E",border:"#25382C"};return React.createElement("div",{style:{fontFamily:"Inter, system-ui, sans-serif",background:e.bg,color:e.text,minHeight:"100vh",maxWidth:480,margin:"0 auto",position:"relative"}},React.createElement("div",{style:{position:"sticky",top:0,zIndex:10,background:e.bg,borderBottom:`1px solid ${e.border}`,padding:"16px 16px 0 16px"}},React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},React.createElement("div",null,React.createElement("div",{className:"sg",style:{fontSize:20,fontWeight:700,letterSpacing:-.3}},"Naija Predicts"),React.createElement("div",{style:{fontSize:12,color:e.muted,marginTop:2}},"Call it right. Climb the board.")),React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8}},React.createElement("button",{onClick:()=>m(!0),style:{background:e.surface,border:`1px solid ${e.border}`,borderRadius:999,width:34,height:34,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",color:e.muted}},React.createElement(l.settings,null)),React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6,background:e.surface,border:`1px solid ${e.border}`,borderRadius:999,padding:"8px 12px"}},React.createElement(l.wallet,{color:e.gold}),React.createElement("span",{className:"sg",style:{fontWeight:600,fontSize:14}},b.toLocaleString())))),React.createElement("div",{style:{display:"flex",gap:20,marginTop:16}},[{id:"feed",label:"Predictions"},{id:"board",label:"Leaderboard"}].map(t=>React.createElement("button",{key:t.id,onClick:()=>M(t.id),style:{background:"none",border:"none",color:o===t.id?e.text:e.muted,fontWeight:600,fontSize:14,padding:"0 0 12px 0",cursor:"pointer",borderBottom:o===t.id?`2px solid ${e.green}`:"2px solid transparent"}},t.label)))),o==="feed"&&React.createElement(React.Fragment,null,React.createElement("div",{style:{display:"flex",gap:8,overflowX:"auto",padding:"14px 16px 4px 16px"}},O.map(t=>React.createElement("button",{key:t,onClick:()=>B(t),style:{flexShrink:0,padding:"6px 14px",borderRadius:999,border:`1px solid ${e.border}`,background:p===t?e.green:e.surface,color:p===t?"#0F1B14":e.muted,fontSize:13,fontWeight:600,cursor:"pointer"}},t))),React.createElement("div",{style:{padding:"12px 16px 90px 16px",display:"flex",flexDirection:"column",gap:12}},X.map(t=>{let i=k[t.id];return React.createElement("div",{key:t.id,style:{background:e.surface,border:`1px solid ${e.border}`,borderRadius:14,padding:16}},React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}},React.createElement("span",{style:{fontSize:11,fontWeight:700,color:e.gold,background:"rgba(242,183,5,0.1)",padding:"3px 8px",borderRadius:6}},t.category),t.hot&&React.createElement("span",{style:{display:"flex",alignItems:"center",gap:4,fontSize:11,color:e.red}},React.createElement(l.flame,{color:e.red})," Trending"),t.live&&React.createElement("span",{style:{display:"flex",alignItems:"center",gap:4,fontSize:11,color:e.green}},React.createElement("span",{style:{width:6,height:6,borderRadius:99,background:e.green}})," Live")),React.createElement("div",{style:{fontSize:15,fontWeight:600,lineHeight:1.4,marginBottom:4}},t.question),React.createElement("div",{style:{fontSize:12,color:e.muted,marginBottom:12}},t.context||"\xA0"),React.createElement("div",{style:{display:"flex",gap:8,marginBottom:8}},React.createElement("button",{className:"side-btn",disabled:!!i,onClick:()=>W(t.id,"yes"),style:{flex:1,padding:"10px 0",borderRadius:10,border:i==="yes"?`1px solid ${e.green}`:`1px solid ${e.border}`,background:i==="yes"?"rgba(31,163,91,0.15)":e.surface2,color:i==="yes"?e.green:e.text,cursor:i?"default":"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:2}},React.createElement("span",{style:{fontSize:11,color:e.muted,fontWeight:600}},"YES"),React.createElement("span",{className:"sg",style:{fontSize:16,fontWeight:700}},t.yes,"%")),React.createElement("button",{className:"side-btn",disabled:!!i,onClick:()=>W(t.id,"no"),style:{flex:1,padding:"10px 0",borderRadius:10,border:i==="no"?`1px solid ${e.red}`:`1px solid ${e.border}`,background:i==="no"?"rgba(228,87,46,0.15)":e.surface2,color:i==="no"?e.red:e.text,cursor:i?"default":"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:2}},React.createElement("span",{style:{fontSize:11,color:e.muted,fontWeight:600}},"NO"),React.createElement("span",{className:"sg",style:{fontSize:16,fontWeight:700}},t.no,"%"))),React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:11,color:e.muted}},React.createElement("span",null,"Closes ",t.closes),i?React.createElement("span",{style:{display:"flex",alignItems:"center",gap:4,color:e.green}},React.createElement(l.check,{color:e.green})," ",g," pts staked"):React.createElement("span",null,"Stake ",g," pts")))}),React.createElement("div",{style:{fontSize:10,color:e.muted,textAlign:"center",marginTop:8}},"FX rates by exchangerate-api.com"))),o==="board"&&React.createElement("div",{style:{padding:"16px 16px 90px 16px"}},React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:16}},React.createElement(l.trophy,{color:e.gold}),React.createElement("span",{className:"sg",style:{fontSize:16,fontWeight:700}},"This week's top predictors")),React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:8}},U.map(t=>React.createElement("div",{key:t.rank,style:{display:"flex",alignItems:"center",justifyContent:"space-between",background:t.isUser?"rgba(31,163,91,0.1)":e.surface,border:t.isUser?`1px solid ${e.green}`:`1px solid ${e.border}`,borderRadius:12,padding:"12px 14px"}},React.createElement("div",{style:{display:"flex",alignItems:"center",gap:12}},React.createElement("span",{className:"sg",style:{width:24,textAlign:"center",fontWeight:700,color:t.rank<=3?e.gold:e.muted}},t.rank),React.createElement("span",{style:{fontWeight:t.isUser?700:500,fontSize:14}},t.name)),React.createElement("span",{className:"sg",style:{fontWeight:600,fontSize:14,color:e.gold}},t.points.toLocaleString()))))),R&&React.createElement("div",{style:{position:"fixed",inset:0,background:"rgba(0,0,0,0.6)",display:"flex",alignItems:"flex-end",justifyContent:"center",zIndex:20},onClick:()=>m(!1)},React.createElement("div",{onClick:t=>t.stopPropagation(),style:{background:e.surface,borderTop:`1px solid ${e.border}`,borderRadius:"18px 18px 0 0",padding:20,width:"100%",maxWidth:480}},React.createElement("div",{className:"sg",style:{fontSize:16,fontWeight:700,marginBottom:4}},"Live data sources"),React.createElement("div",{style:{fontSize:12,color:e.muted,marginBottom:16}},"FX is live automatically. NGX stock prices need a free Mansa API key."),React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:14,fontSize:13}},d==="live"?React.createElement(React.Fragment,null,React.createElement("span",{style:{width:8,height:8,borderRadius:99,background:e.green}}),"USD/NGN live at \u20A6",u?.toFixed(2)):d==="loading"?React.createElement(React.Fragment,null,React.createElement(l.refresh,null)," Fetching FX rate\u2026"):React.createElement(React.Fragment,null,React.createElement(l.alert,{color:e.red})," FX fetch failed",React.createElement("button",{onClick:C,style:{marginLeft:"auto",background:"none",border:"none",color:e.green,cursor:"pointer",fontSize:12}},"Retry"))),React.createElement("label",{style:{fontSize:12,color:e.muted,display:"block",marginBottom:6}},"Mansa API key (free at mansaapi.com)"),React.createElement("div",{style:{display:"flex",gap:8}},React.createElement("input",{type:"password",value:z,onChange:t=>$(t.target.value),placeholder:"mansa_live_sk_...",style:{flex:1,background:e.surface2,border:`1px solid ${e.border}`,borderRadius:8,padding:"10px 12px",color:e.text,fontSize:13}}),React.createElement("button",{onClick:()=>D(z),style:{background:e.green,border:"none",borderRadius:8,padding:"0 16px",color:"#0F1B14",fontWeight:700,fontSize:13,cursor:"pointer"}},"Connect")),c==="error"&&React.createElement("div",{style:{fontSize:12,color:e.red,marginTop:8}},"Couldn't fetch NGX data \u2014 check the key and the endpoint in mansaapi.com/docs."),c==="live"&&React.createElement("div",{style:{fontSize:12,color:e.green,marginTop:8}},"NGX prices connected."),React.createElement("button",{onClick:()=>m(!1),style:{width:"100%",marginTop:18,background:e.surface2,border:`1px solid ${e.border}`,borderRadius:10,padding:"12px 0",color:e.text,fontWeight:600,fontSize:14,cursor:"pointer"}},"Done"))),S&&React.createElement("div",{style:{position:"fixed",bottom:24,left:"50%",transform:"translateX(-50%)",background:e.surface2,border:`1px solid ${e.border}`,borderRadius:10,padding:"10px 18px",fontSize:13,fontWeight:600,maxWidth:440,width:"calc(100% - 48px)",textAlign:"center"}},S))}ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(V,null));})();
 
-<script type="text/babel" data-presets="react">
-const { useState, useEffect } = React;
-
-const CATEGORIES = ["All", "NGX", "FX", "Football", "Politics", "Naija Ent"];
-const STAKE = 100;
-
-const STATIC_EVENTS = [
-  { id: 3, category: "Football", question: "Super Eagles to win their next AFCON qualifier?", yes: 71, no: 29, closes: "Sat, kickoff", hot: true },
-  { id: 4, category: "Politics", question: "Fuel subsidy debate resolved before month end?", yes: 27, no: 73, closes: "Sep 30", hot: false },
-  { id: 5, category: "Naija Ent", question: "Will this week's BBN eviction be a top-3 favorite?", yes: 33, no: 67, closes: "Sun, 10pm", hot: true },
-];
-
-const LEADERBOARD = [
-  { rank: 1, name: "Chiamaka_V", points: 14250 },
-  { rank: 2, name: "OluOfLagos", points: 12980 },
-  { rank: 3, name: "Emeka_Predicts", points: 11430 },
-  { rank: 4, name: "You", points: 8600, isUser: true },
-  { rank: 5, name: "TundeTrades", points: 7920 },
-];
-
-const NGX_TICKERS = [
-  { symbol: "DANGCEM", name: "Dangote Cement" },
-  { symbol: "GTCO", name: "GTCO" },
-  { symbol: "MTNN", name: "MTN Nigeria" },
-];
-
-// --- tiny inline icon set (no icon library needed) ---
-const Icon = {
-  flame: (p) => <svg width={p.size||14} height={p.size||14} viewBox="0 0 24 24" fill="none" stroke={p.color||"currentColor"} strokeWidth="2"><path d="M12 2c1 4-3 5-3 9a3 3 0 006 0c0-1.5-.5-2-1-3 2 1 3 3 3 5a5 5 0 01-10 0c0-4 3-6 5-11z"/></svg>,
-  trophy: (p) => <svg width={p.size||18} height={p.size||18} viewBox="0 0 24 24" fill="none" stroke={p.color||"currentColor"} strokeWidth="2"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 01-10 0V4zM7 5H4a3 3 0 003 3M17 5h3a3 3 0 01-3 3"/></svg>,
-  wallet: (p) => <svg width={p.size||14} height={p.size||14} viewBox="0 0 24 24" fill="none" stroke={p.color||"currentColor"} strokeWidth="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M17 15h.01"/></svg>,
-  check: (p) => <svg width={p.size||12} height={p.size||12} viewBox="0 0 24 24" fill="none" stroke={p.color||"currentColor"} strokeWidth="3"><path d="M20 6L9 17l-5-5"/></svg>,
-  settings: (p) => <svg width={p.size||15} height={p.size||15} viewBox="0 0 24 24" fill="none" stroke={p.color||"currentColor"} strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1-1.6 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.9.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.9V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg>,
-  refresh: (p) => <svg width={p.size||13} height={p.size||13} viewBox="0 0 24 24" fill="none" stroke={p.color||"currentColor"} strokeWidth="2"><path d="M21 12a9 9 0 11-3-6.7M21 3v6h-6"/></svg>,
-  alert: (p) => <svg width={p.size||13} height={p.size||13} viewBox="0 0 24 24" fill="none" stroke={p.color||"currentColor"} strokeWidth="2"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>,
-};
-
-function App() {
-  const [view, setView] = useState("feed");
-  const [category, setCategory] = useState("All");
-  const [points, setPoints] = useState(8600);
-  const [picks, setPicks] = useState({});
-  const [toast, setToast] = useState(null);
-  const [showSettings, setShowSettings] = useState(false);
-
-  const [fxRate, setFxRate] = useState(null);
-  const [fxStatus, setFxStatus] = useState("loading");
-
-  const [mansaKey, setMansaKey] = useState("");
-  const [ngxQuotes, setNgxQuotes] = useState({});
-  const [ngxStatus, setNgxStatus] = useState("idle");
-
-  const [liveOdds, setLiveOdds] = useState({ fx: { yes: 62, no: 38 }, dangcem: { yes: 44, no: 56 } });
-
-  useEffect(() => { fetchFx(); }, []);
-
-  async function fetchFx() {
-    setFxStatus("loading");
-    try {
-      const res = await fetch("https://open.er-api.com/v6/latest/USD");
-      const data = await res.json();
-      if (data.result === "success" && data.rates && data.rates.NGN) {
-        setFxRate(data.rates.NGN);
-        setFxStatus("live");
-      } else {
-        setFxStatus("error");
-      }
-    } catch (e) {
-      setFxStatus("error");
-    }
-  }
-
-  async function fetchNgx(key) {
-    if (!key) return;
-    setNgxStatus("loading");
-    try {
-      const results = {};
-      for (const t of NGX_TICKERS) {
-        const res = await fetch(`https://mansaapi.com/api/v1/markets/exchanges/NGX/stocks/${t.symbol}`, {
-          headers: { Authorization: `Bearer ${key}` },
-        });
-        if (!res.ok) throw new Error("request failed");
-        const data = await res.json();
-        results[t.symbol] = data.data || data;
-      }
-      setNgxQuotes(results);
-      setNgxStatus("live");
-    } catch (e) {
-      setNgxStatus("error");
-    }
-  }
-
-  const fxThreshold = fxRate ? Math.ceil(fxRate / 25) * 25 : 1650;
-  const dangcem = ngxQuotes["DANGCEM"];
-
-  const liveEvents = [
-    {
-      id: 1,
-      category: "FX",
-      question: `Will USD/NGN close above ₦${fxThreshold.toLocaleString()} this Friday?`,
-      context: fxStatus === "live" ? `Live rate: ₦${fxRate.toFixed(2)}` : fxStatus === "loading" ? "Fetching live rate…" : "Live rate unavailable — showing last known odds",
-      yes: liveOdds.fx.yes, no: liveOdds.fx.no, closes: "Fri, 5pm WAT", hot: true, live: fxStatus === "live",
-    },
-    {
-      id: 2,
-      category: "NGX",
-      question: "Will Dangote Cement gain 3%+ this week?",
-      context: ngxStatus === "live" && dangcem ? `Live: ₦${dangcem.price ?? "—"} (${dangcem.change_percent ?? dangcem.changePercent ?? "—"}% today)` : ngxStatus === "loading" ? "Fetching live price…" : "Add a free Mansa API key in Settings for live NGX prices",
-      yes: liveOdds.dangcem.yes, no: liveOdds.dangcem.no, closes: "Fri, close", hot: false, live: ngxStatus === "live",
-    },
-  ];
-
-  const events = [...liveEvents, ...STATIC_EVENTS];
-  const filtered = category === "All" ? events : events.filter((e) => e.category === category);
-
-  function placePick(eventId, side) {
-    if (picks[eventId]) return;
-    if (points < STAKE) {
-      setToast("Not enough points to predict.");
-      setTimeout(() => setToast(null), 1800);
-      return;
-    }
-    setPoints((p) => p - STAKE);
-    setPicks((p) => ({ ...p, [eventId]: side }));
-    if (eventId === 1) setLiveOdds((o) => bump(o, "fx", side));
-    else if (eventId === 2) setLiveOdds((o) => bump(o, "dangcem", side));
-    setToast(`Staked ${STAKE} pts on ${side.toUpperCase()}`);
-    setTimeout(() => setToast(null), 1800);
-  }
-
-  function bump(o, key, side) {
-    const cur = o[key];
-    const shift = 2;
-    const next = side === "yes"
-      ? { yes: Math.min(96, cur.yes + shift), no: Math.max(4, cur.no - shift) }
-      : { no: Math.min(96, cur.no + shift), yes: Math.max(4, cur.yes - shift) };
-    return { ...o, [key]: next };
-  }
-
-  const colors = {
-    bg: "#0F1B14", surface: "#16241C", surface2: "#1D2E23",
-    green: "#1FA35B", gold: "#F2B705", text: "#F5F2EA",
-    muted: "#93A599", red: "#E4572E", border: "#25382C",
-  };
-
-  return (
-    <div style={{ fontFamily: "Inter, system-ui, sans-serif", background: colors.bg, color: colors.text, minHeight: "100vh", maxWidth: 480, margin: "0 auto", position: "relative" }}>
-      <div style={{ position: "sticky", top: 0, zIndex: 10, background: colors.bg, borderBottom: `1px solid ${colors.border}`, padding: "16px 16px 0 16px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div>
-            <div className="sg" style={{ fontSize: 20, fontWeight: 700, letterSpacing: -0.3 }}>Naija Predicts</div>
-            <div style={{ fontSize: 12, color: colors.muted, marginTop: 2 }}>Call it right. Climb the board.</div>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <button onClick={() => setShowSettings(true)} style={{ background: colors.surface, border: `1px solid ${colors.border}`, borderRadius: 999, width: 34, height: 34, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: colors.muted }}>
-              <Icon.settings />
-            </button>
-            <div style={{ display: "flex", alignItems: "center", gap: 6, background: colors.surface, border: `1px solid ${colors.border}`, borderRadius: 999, padding: "8px 12px" }}>
-              <Icon.wallet color={colors.gold} />
-              <span className="sg" style={{ fontWeight: 600, fontSize: 14 }}>{points.toLocaleString()}</span>
-            </div>
-          </div>
-        </div>
-        <div style={{ display: "flex", gap: 20, marginTop: 16 }}>
-          {[{ id: "feed", label: "Predictions" }, { id: "board", label: "Leaderboard" }].map((t) => (
-            <button key={t.id} onClick={() => setView(t.id)} style={{ background: "none", border: "none", color: view === t.id ? colors.text : colors.muted, fontWeight: 600, fontSize: 14, padding: "0 0 12px 0", cursor: "pointer", borderBottom: view === t.id ? `2px solid ${colors.green}` : "2px solid transparent" }}>
-              {t.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {view === "feed" && (
-        <>
-          <div style={{ display: "flex", gap: 8, overflowX: "auto", padding: "14px 16px 4px 16px" }}>
-            {CATEGORIES.map((c) => (
-              <button key={c} onClick={() => setCategory(c)} style={{ flexShrink: 0, padding: "6px 14px", borderRadius: 999, border: `1px solid ${colors.border}`, background: category === c ? colors.green : colors.surface, color: category === c ? "#0F1B14" : colors.muted, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
-                {c}
-              </button>
-            ))}
-          </div>
-
-          <div style={{ padding: "12px 16px 90px 16px", display: "flex", flexDirection: "column", gap: 12 }}>
-            {filtered.map((e) => {
-              const picked = picks[e.id];
-              return (
-                <div key={e.id} style={{ background: colors.surface, border: `1px solid ${colors.border}`, borderRadius: 14, padding: 16 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-                    <span style={{ fontSize: 11, fontWeight: 700, color: colors.gold, background: "rgba(242,183,5,0.1)", padding: "3px 8px", borderRadius: 6 }}>{e.category}</span>
-                    {e.hot && <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: colors.red }}><Icon.flame color={colors.red} /> Trending</span>}
-                    {e.live && <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: colors.green }}><span style={{ width: 6, height: 6, borderRadius: 99, background: colors.green }} /> Live</span>}
-                  </div>
-                  <div style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.4, marginBottom: 4 }}>{e.question}</div>
-                  <div style={{ fontSize: 12, color: colors.muted, marginBottom: 12 }}>{e.context || "\u00A0"}</div>
-                  <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-                    <button className="side-btn" disabled={!!picked} onClick={() => placePick(e.id, "yes")} style={{ flex: 1, padding: "10px 0", borderRadius: 10, border: picked === "yes" ? `1px solid ${colors.green}` : `1px solid ${colors.border}`, background: picked === "yes" ? "rgba(31,163,91,0.15)" : colors.surface2, color: picked === "yes" ? colors.green : colors.text, cursor: picked ? "default" : "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-                      <span style={{ fontSize: 11, color: colors.muted, fontWeight: 600 }}>YES</span>
-                      <span className="sg" style={{ fontSize: 16, fontWeight: 700 }}>{e.yes}%</span>
-                    </button>
-                    <button className="side-btn" disabled={!!picked} onClick={() => placePick(e.id, "no")} style={{ flex: 1, padding: "10px 0", borderRadius: 10, border: picked === "no" ? `1px solid ${colors.red}` : `1px solid ${colors.border}`, background: picked === "no" ? "rgba(228,87,46,0.15)" : colors.surface2, color: picked === "no" ? colors.red : colors.text, cursor: picked ? "default" : "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-                      <span style={{ fontSize: 11, color: colors.muted, fontWeight: 600 }}>NO</span>
-                      <span className="sg" style={{ fontSize: 16, fontWeight: 700 }}>{e.no}%</span>
-                    </button>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: colors.muted }}>
-                    <span>Closes {e.closes}</span>
-                    {picked ? <span style={{ display: "flex", alignItems: "center", gap: 4, color: colors.green }}><Icon.check color={colors.green} /> {STAKE} pts staked</span> : <span>Stake {STAKE} pts</span>}
-                  </div>
-                </div>
-              );
-            })}
-            <div style={{ fontSize: 10, color: colors.muted, textAlign: "center", marginTop: 8 }}>FX rates by exchangerate-api.com</div>
-          </div>
-        </>
-      )}
-
-      {view === "board" && (
-        <div style={{ padding: "16px 16px 90px 16px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
-            <Icon.trophy color={colors.gold} />
-            <span className="sg" style={{ fontSize: 16, fontWeight: 700 }}>This week's top predictors</span>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {LEADERBOARD.map((u) => (
-              <div key={u.rank} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: u.isUser ? "rgba(31,163,91,0.1)" : colors.surface, border: u.isUser ? `1px solid ${colors.green}` : `1px solid ${colors.border}`, borderRadius: 12, padding: "12px 14px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <span className="sg" style={{ width: 24, textAlign: "center", fontWeight: 700, color: u.rank <= 3 ? colors.gold : colors.muted }}>{u.rank}</span>
-                  <span style={{ fontWeight: u.isUser ? 700 : 500, fontSize: 14 }}>{u.name}</span>
-                </div>
-                <span className="sg" style={{ fontWeight: 600, fontSize: 14, color: colors.gold }}>{u.points.toLocaleString()}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {showSettings && (
-        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "flex-end", justifyContent: "center", zIndex: 20 }} onClick={() => setShowSettings(false)}>
-          <div onClick={(ev) => ev.stopPropagation()} style={{ background: colors.surface, borderTop: `1px solid ${colors.border}`, borderRadius: "18px 18px 0 0", padding: 20, width: "100%", maxWidth: 480 }}>
-            <div className="sg" style={{ fontSize: 16, fontWeight: 700, marginBottom: 4 }}>Live data sources</div>
-            <div style={{ fontSize: 12, color: colors.muted, marginBottom: 16 }}>FX is live automatically. NGX stock prices need a free Mansa API key.</div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14, fontSize: 13 }}>
-              {fxStatus === "live" ? (<><span style={{ width: 8, height: 8, borderRadius: 99, background: colors.green }} />USD/NGN live at ₦{fxRate?.toFixed(2)}</>) :
-               fxStatus === "loading" ? (<><Icon.refresh /> Fetching FX rate…</>) :
-               (<><Icon.alert color={colors.red} /> FX fetch failed<button onClick={fetchFx} style={{ marginLeft: "auto", background: "none", border: "none", color: colors.green, cursor: "pointer", fontSize: 12 }}>Retry</button></>)}
-            </div>
-            <label style={{ fontSize: 12, color: colors.muted, display: "block", marginBottom: 6 }}>Mansa API key (free at mansaapi.com)</label>
-            <div style={{ display: "flex", gap: 8 }}>
-              <input type="password" value={mansaKey} onChange={(e) => setMansaKey(e.target.value)} placeholder="mansa_live_sk_..." style={{ flex: 1, background: colors.surface2, border: `1px solid ${colors.border}`, borderRadius: 8, padding: "10px 12px", color: colors.text, fontSize: 13 }} />
-              <button onClick={() => fetchNgx(mansaKey)} style={{ background: colors.green, border: "none", borderRadius: 8, padding: "0 16px", color: "#0F1B14", fontWeight: 700, fontSize: 13, cursor: "pointer" }}>Connect</button>
-            </div>
-            {ngxStatus === "error" && <div style={{ fontSize: 12, color: colors.red, marginTop: 8 }}>Couldn't fetch NGX data — check the key and the endpoint in mansaapi.com/docs.</div>}
-            {ngxStatus === "live" && <div style={{ fontSize: 12, color: colors.green, marginTop: 8 }}>NGX prices connected.</div>}
-            <button onClick={() => setShowSettings(false)} style={{ width: "100%", marginTop: 18, background: colors.surface2, border: `1px solid ${colors.border}`, borderRadius: 10, padding: "12px 0", color: colors.text, fontWeight: 600, fontSize: 14, cursor: "pointer" }}>Done</button>
-          </div>
-        </div>
-      )}
-
-      {toast && (
-        <div style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: colors.surface2, border: `1px solid ${colors.border}`, borderRadius: 10, padding: "10px 18px", fontSize: 13, fontWeight: 600, maxWidth: 440, width: "calc(100% - 48px)", textAlign: "center" }}>
-          {toast}
-        </div>
-      )}
-    </div>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>
 </body>
 </html>
