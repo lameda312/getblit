@@ -24,6 +24,16 @@
 </head>
 <body>
 <div id="root"></div>
+<script>
+  window.onerror = function (msg, url, line, col, error) {
+    var root = document.getElementById('root');
+    if (root) {
+      root.innerHTML = '<pre style="color:#fff;background:#3a1414;padding:16px;white-space:pre-wrap;font-size:13px;line-height:1.5;margin:20px;border-radius:8px;">Something broke while loading the page:\n\n' +
+        msg + '\n(line ' + line + ', col ' + col + ')' + '</pre>';
+    }
+    return false;
+  };
+</script>
 
 <script type="text/babel" data-presets="react">
 const { useState, useEffect } = React;
