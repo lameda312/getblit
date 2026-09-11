@@ -104,12 +104,46 @@ function App() {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
       setAuthLoading(false);
+      if (session?.user) loadUserData(session.user.id);
     });
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
+      if (session?.user) loadUserData(session.user.id);
     });
     return () => listener.subscription.unsubscribe();
   }, []);
+
+  async function loadUserData(userId) {
+    // fetch or create profile (points balance)
+    let { data: profile, error } = await supabase
+      .from("profiles")
+      .select("points")
+      .eq("id", userId)
+      .single();
+
+    if (error && error.code === "PGRST116") {
+      // no profile row yet — create one with the starting balance
+      const { data: created } = await supabase
+        .from("profiles")
+        .insert({ id: userId, points: 8600 })
+        .select("points")
+        .single();
+      profile = created;
+    }
+    if (profile) setPoints(profile.points);
+
+    // fetch existing picks
+    const { data: userPicks } = await supabase
+      .from("picks")
+      .select("event_id, side")
+      .eq("user_id", userId);
+
+    if (userPicks) {
+      const picksMap = {};
+      userPicks.forEach((p) => { picksMap[p.event_id] = p.side; });
+      setPicks(picksMap);
+    }
+  }
 
   async function fetchFx() {
     setFxStatus("loading");
@@ -187,6 +221,8 @@ function App() {
   async function handleSignOut() {
     await supabase.auth.signOut();
     setShowSettings(false);
+    setPoints(8600);
+    setPicks({});
     setToast("Signed out.");
     setTimeout(() => setToast(null), 1500);
   }
@@ -214,7 +250,7 @@ function App() {
   const events = [...liveEvents, ...STATIC_EVENTS];
   const filtered = category === "All" ? events : events.filter((e) => e.category === category);
 
-  function placePick(eventId, side) {
+  async function placePick(eventId, side) {
     if (!user) {
       setShowAuth(true);
       setAuthMode("signin");
@@ -226,12 +262,32 @@ function App() {
       setTimeout(() => setToast(null), 1800);
       return;
     }
-    setPoints((p) => p - STAKE);
+
+    const newBalance = points - STAKE;
+
+    // optimistic UI update
+    setPoints(newBalance);
     setPicks((p) => ({ ...p, [eventId]: side }));
     if (eventId === 1) setLiveOdds((o) => bump(o, "fx", side));
     else if (eventId === 2) setLiveOdds((o) => bump(o, "dangcem", side));
     setToast(`Staked ${STAKE} pts on ${side.toUpperCase()}`);
     setTimeout(() => setToast(null), 1800);
+
+    // persist to Supabase
+    const { error: pickError } = await supabase
+      .from("picks")
+      .insert({ user_id: user.id, event_id: eventId, side, staked: STAKE });
+
+    if (pickError) {
+      // roll back on failure
+      setPoints((p) => p + STAKE);
+      setPicks((p) => { const next = { ...p }; delete next[eventId]; return next; });
+      setToast("Couldn't save your pick — try again.");
+      setTimeout(() => setToast(null), 2000);
+      return;
+    }
+
+    await supabase.from("profiles").update({ points: newBalance }).eq("id", user.id);
   }
 
   function bump(o, key, side) {
